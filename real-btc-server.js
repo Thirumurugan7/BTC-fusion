@@ -268,7 +268,7 @@ async function startServer() {
     const balance = await bitcoinIntegration.getRealBalance();
     
     app.listen(PORT, () => {
-        console.log('🏆 REAL BITCOIN SERVER WITH ACTUAL BTC!');
+        console.log('🏆 CROSSCHAIN BRIDGE - REAL BITCOIN INTEGRATION!');
         console.log(`🚀 Server: http://localhost:${PORT}`);
         console.log(`📱 Web UI: http://localhost:${PORT}`);
         console.log(`🔗 API: http://localhost:${PORT}/api/*`);
