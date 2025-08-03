@@ -2,6 +2,7 @@ const app = require('./api/index.js');
 
 // Test the app locally
 const PORT = process.env.PORT || 3000;
+console.log(process.env.PORT);
 
 app.listen(PORT, () => {
     console.log('🏆 YOUR BOY SATOSHI - VERCEL TEST SERVER!');
