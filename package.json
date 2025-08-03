@@ -1,38 +1,37 @@
 {
-  "name": "cross-chain",
+  "name": "your-boy-satoshi",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Revolutionary Bitcoin ↔ Ethereum Cross-Chain Bridge",
+  "main": "real-btc-server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node server.js",
-    "build": "webpack --mode production",
-    "test": "jest"
+    "start": "node real-btc-server.js",
+    "dev": "node real-btc-server.js",
+    "build": "echo 'No build step required'",
+    "vercel-build": "echo 'Build completed'"
   },
-  "private": true,
   "dependencies": {
-    "@1inch/cross-chain-sdk": "latest",
-    "dotenv": "^16.4.5",
-    "ethers": "^6.13.3",
-    "web3": "^4.13.0",
-    "bitcoinjs-lib": "^6.1.5",
+    "@1inch/cross-chain-sdk": "^1.0.0",
     "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "axios": "^1.6.0",
-    "bip32": "^4.0.0",
-    "bip39": "^3.1.0",
+    "bitcoinjs-lib": "^6.1.5",
     "ecpair": "^2.1.0",
-    "tiny-secp256k1": "^2.2.3"
+    "tiny-secp256k1": "^2.2.3",
+    "axios": "^1.6.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "web3": "^4.16.0"
   },
-  "devDependencies": {
-    "@types/node": "^22.7.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.2",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "html-webpack-plugin": "^5.5.3",
-    "css-loader": "^6.8.1",
-    "style-loader": "^3.3.3",
-    "jest": "^29.7.0"
-  }
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "bitcoin",
+    "ethereum",
+    "cross-chain",
+    "1inch",
+    "fusion-plus",
+    "htlc",
+    "blockchain"
+  ],
+  "author": "Your Boy Satoshi",
+  "license": "MIT"
 }

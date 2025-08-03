@@ -267,35 +267,39 @@ async function startServer() {
     console.log('🔍 Checking real Bitcoin testnet balance...');
     const balance = await bitcoinIntegration.getRealBalance();
     
-    app.listen(PORT, () => {
-        console.log('🏆 YOUR BOY SATOSHI - REAL BITCOIN INTEGRATION!');
-        console.log(`🚀 Server: http://localhost:${PORT}`);
-        console.log(`📱 Web UI: http://localhost:${PORT}`);
-        console.log(`🔗 API: http://localhost:${PORT}/api/*`);
-        console.log(`💰 Bitcoin: ${bitcoinIntegration.getAddress()}`);
-        console.log(`💰 Ethereum: ${process.env.WALLET_ADDRESS}`);
-        
-        console.log('\n🎯 REAL INTEGRATION FEATURES:');
-        console.log(`   ✅ Real BTC available: ${balance.confirmed} BTC`);
-        console.log('   ✅ REAL Bitcoin testnet transactions');
-        console.log('   ✅ ACTUAL HTLC implementation');
-        console.log('   ✅ REAL transaction broadcasting');
-        console.log('   ✅ REAL UTXO management');
-        console.log('   ✅ REAL Bitcoin script generation');
-        console.log('   ✅ REAL transaction signing');
-        console.log('   ✅ REAL explorer links');
-        console.log('   ✅ REAL balance checking');
-        
-        console.log('\n💰 REAL BITCOIN BALANCE:');
-        console.log(`   Confirmed: ${balance.confirmed} BTC`);
-        console.log(`   Unconfirmed: ${balance.unconfirmed} BTC`);
-        console.log(`   Address: ${balance.address}`);
-        
-        console.log('\n🏆 YOUR BOY SATOSHI IS GOING TO WIN THIS HACKATHON! 🏆');
-        console.log('🚀 Ready for REAL Bitcoin transactions!');
-    });
+    // Update the server startup to work with Vercel
+    if (process.env.NODE_ENV === 'production') {
+        // For Vercel deployment
+        module.exports = app;
+    } else {
+        // For local development
+        app.listen(PORT, () => {
+            console.log('🏆 YOUR BOY SATOSHI - REAL BITCOIN INTEGRATION!');
+            console.log(`🚀 Server: http://localhost:${PORT}`);
+            console.log(`📱 Web UI: http://localhost:${PORT}`);
+            console.log(`🔗 API: http://localhost:${PORT}/api/*`);
+            console.log(`💰 Bitcoin: ${bitcoinIntegration.getAddress()}`);
+            console.log(`💰 Ethereum: ${process.env.WALLET_ADDRESS || 'Not configured'}`);
+            
+            console.log('\n🎯 REAL INTEGRATION FEATURES:');
+            console.log(`   ✅ Real BTC available: ${balance.confirmed} BTC`);
+            console.log('   ✅ REAL Bitcoin testnet transactions');
+            console.log('   ✅ ACTUAL HTLC implementation');
+            console.log('   ✅ REAL transaction broadcasting');
+            console.log('   ✅ REAL UTXO management');
+            console.log('   ✅ REAL Bitcoin script generation');
+            console.log('   ✅ REAL transaction signing');
+            console.log('   ✅ REAL explorer links');
+            console.log('   ✅ REAL balance checking');
+            
+            console.log('\n💰 REAL BITCOIN BALANCE:');
+            console.log(`   Confirmed: ${balance.confirmed} BTC`);
+            console.log(`   Unconfirmed: ${balance.unconfirmed} BTC`);
+            console.log(`   Address: ${balance.address}`);
+            console.log('\n🏆 YOUR BOY SATOSHI IS GOING TO WIN THIS HACKATHON! 🏆');
+            console.log('🚀 Ready for REAL Bitcoin transactions!');
+        });
+    }
 }
 
-startServer().catch(console.error);
-
-module.exports = app; 
+startServer().catch(console.error); 
