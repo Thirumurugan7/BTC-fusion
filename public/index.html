@@ -482,13 +482,17 @@
                 const btcResponse = await fetch('/api/balance/bitcoin_testnet');
                 const btcBalance = await btcResponse.json();
                 document.getElementById('btc-balance').textContent = 
-                    `${(btcBalance.confirmed / 100000000).toFixed(8)} BTC`;
+                    `${btcBalance.confirmed.toFixed(8)} BTC`;
 
-                // Load Ethereum balance (placeholder)
-                document.getElementById('eth-balance').textContent = '0.0 ETH';
+                // Load Ethereum balance
+                const ethResponse = await fetch('/api/balance/1');
+                const ethBalance = await ethResponse.json();
+                document.getElementById('eth-balance').textContent = 
+                    `${parseFloat(ethBalance.confirmed).toFixed(6)} ETH`;
             } catch (error) {
                 console.error('Error loading balances:', error);
                 document.getElementById('btc-balance').textContent = 'Error loading';
+                document.getElementById('eth-balance').textContent = 'Error loading';
             }
         }
 
@@ -499,10 +503,12 @@
                 const btcAddress = await btcResponse.json();
                 document.getElementById('btc-address').textContent = btcAddress.address;
 
-                // Ethereum address (placeholder)
-                document.getElementById('eth-address').textContent = '0x...';
+                // Load Ethereum address from environment (we'll use a placeholder for now)
+                document.getElementById('eth-address').textContent = '0x2591e4c0e6e771927a45efae8cd5bf20e585a57a';
             } catch (error) {
                 console.error('Error loading addresses:', error);
+                document.getElementById('btc-address').textContent = 'Error loading address';
+                document.getElementById('eth-address').textContent = 'Error loading address';
             }
         }
 

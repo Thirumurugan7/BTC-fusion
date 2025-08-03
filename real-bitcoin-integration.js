@@ -45,6 +45,16 @@ class RealBitcoinIntegration {
         }
     }
 
+    async getTransactionHex(txid) {
+        try {
+            const response = await axios.get(`https://blockstream.info/testnet/api/tx/${txid}/hex`);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting transaction hex:', error.message);
+            throw error;
+        }
+    }
+
     async createRealHtlcTransaction(amount, hashLock, timelock) {
         try {
             console.log('🚀 Creating REAL HTLC transaction...');
@@ -55,18 +65,34 @@ class RealBitcoinIntegration {
                 throw new Error('No UTXOs available for transaction');
             }
 
+            console.log(`📦 Found ${utxos.length} UTXOs`);
+
             // Create transaction using the new API
             const psbt = new bitcoin.Psbt({ network: this.network });
             
             // Add inputs from UTXOs
             let totalInput = 0;
             for (const utxo of utxos) {
-                psbt.addInput({
-                    hash: utxo.txid,
-                    index: utxo.vout,
-                    nonWitnessUtxo: Buffer.from(utxo.txid, 'hex') // This will be replaced with actual UTXO data
-                });
-                totalInput += utxo.value;
+                try {
+                    // Get the full transaction hex for this UTXO
+                    const txHex = await this.getTransactionHex(utxo.txid);
+                    const tx = bitcoin.Transaction.fromHex(txHex);
+                    
+                    psbt.addInput({
+                        hash: utxo.txid,
+                        index: utxo.vout,
+                        nonWitnessUtxo: tx.toBuffer()
+                    });
+                    totalInput += utxo.value;
+                    console.log(`➕ Added input: ${utxo.txid}:${utxo.vout} (${utxo.value} sats)`);
+                } catch (error) {
+                    console.log(`⚠️ Skipping UTXO ${utxo.txid}:${utxo.vout} due to error:`, error.message);
+                    continue;
+                }
+            }
+
+            if (totalInput === 0) {
+                throw new Error('No valid UTXOs could be added to transaction');
             }
 
             // Create HTLC script
@@ -75,6 +101,8 @@ class RealBitcoinIntegration {
                 redeem: { output: htlcScript }, 
                 network: this.network 
             }).address;
+
+            console.log(`🎯 HTLC Address: ${htlcAddress}`);
 
             // Add output to HTLC address
             psbt.addOutput({
@@ -90,11 +118,19 @@ class RealBitcoinIntegration {
                     address: this.address,
                     value: change
                 });
+                console.log(`💰 Change output: ${change} sats to ${this.address}`);
             }
 
+            console.log(`📊 Transaction summary:`);
+            console.log(`   Inputs: ${totalInput} sats`);
+            console.log(`   HTLC Output: ${amount} sats`);
+            console.log(`   Fee: ${fee} sats`);
+            console.log(`   Change: ${change} sats`);
+
             // Sign inputs
-            for (let i = 0; i < utxos.length; i++) {
+            for (let i = 0; i < psbt.data.inputs.length; i++) {
                 psbt.signInput(i, this.keyPair);
+                console.log(`✍️ Signed input ${i}`);
             }
 
             // Finalize and extract transaction
@@ -102,7 +138,8 @@ class RealBitcoinIntegration {
             const tx = psbt.extractTransaction();
             const txHex = tx.toHex();
             
-            console.log('✅ REAL HTLC transaction created:', txHex.substring(0, 64) + '...');
+            console.log('✅ REAL HTLC transaction created successfully!');
+            console.log(`📝 Transaction hex: ${txHex.substring(0, 64)}...`);
             return txHex;
             
         } catch (error) {
