@@ -154,7 +154,8 @@ app.post('/api/submit-secret', async (req, res) => {
 
 app.get('/api/bitcoin-address', (req, res) => {
     try {
-        const address = fusionPlus.getBitcoinAddress();
+        // Use the Bitcoin address from environment variable
+        const address = process.env.BITCOIN_ADDRESS || 'mpjCmhYqwCDK2Vp5WHrxtJEaaZJmduG6iH';
         res.json({ address });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -171,7 +172,7 @@ app.listen(PORT, () => {
     console.log(`🚀 Server: http://localhost:${PORT}`);
     console.log(`📱 Web UI: http://localhost:${PORT}`);
     console.log(`🔗 API: http://localhost:${PORT}/api/*`);
-    console.log(`💰 Bitcoin: ${fusionPlus.getBitcoinAddress()}`);
+    console.log(`💰 Bitcoin: ${process.env.BITCOIN_ADDRESS || 'mpjCmhYqwCDK2Vp5WHrxtJEaaZJmduG6iH'}`);
     
     console.log('\n🎯 HACKATHON DEMO FEATURES:');
     console.log('   ✅ REAL Bitcoin testnet transactions');

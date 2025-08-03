@@ -18,13 +18,11 @@ class FusionPlusBitcoin {
             blockchainProvider: config.blockchainProvider
         });
         
-        // Initialize Bitcoin connector if Bitcoin is involved
-        if (this.isBitcoinChain(config.srcChainId) || this.isBitcoinChain(config.dstChainId)) {
-            this.bitcoinConnector = new BitcoinConnector(
-                config.bitcoinPrivateKey || config.walletKey,
-                this.getBitcoinNetwork(config.srcChainId || config.dstChainId)
-            );
-        }
+        // Always initialize Bitcoin connector for hackathon demo
+        this.bitcoinConnector = new BitcoinConnector(
+            config.bitcoinPrivateKey || config.walletKey,
+            'testnet' // Default to testnet for hackathon
+        );
     }
 
     isBitcoinChain(chainId) {
