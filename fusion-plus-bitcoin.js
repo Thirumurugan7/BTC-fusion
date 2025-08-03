@@ -1,6 +1,6 @@
 const { SDK, HashLock, PrivateKeyProviderConnector, NetworkEnum } = require("@1inch/cross-chain-sdk");
 const BitcoinConnector = require('./bitcoin-connector');
-const { randomBytes } = require('ethers');
+const crypto = require('crypto'); // Use built-in crypto module
 
 // Extended NetworkEnum to include Bitcoin
 const ExtendedNetworkEnum = {
@@ -176,7 +176,7 @@ class FusionPlusBitcoin {
 
     // Utility functions
     generateSecret() {
-        return '0x' + Buffer.from(randomBytes(32)).toString('hex');
+        return '0x' + Buffer.from(crypto.randomBytes(32)).toString('hex');
     }
 
     generateHashLock(secret) {
