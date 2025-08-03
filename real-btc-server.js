@@ -268,7 +268,7 @@ async function startServer() {
     const balance = await bitcoinIntegration.getRealBalance();
     
     app.listen(PORT, () => {
-        console.log('🏆 CROSSCHAIN BRIDGE - REAL BITCOIN INTEGRATION!');
+        console.log('🏆 YOUR BOY SATOSHI - REAL BITCOIN INTEGRATION!');
         console.log(`🚀 Server: http://localhost:${PORT}`);
         console.log(`📱 Web UI: http://localhost:${PORT}`);
         console.log(`🔗 API: http://localhost:${PORT}/api/*`);
@@ -291,7 +291,7 @@ async function startServer() {
         console.log(`   Unconfirmed: ${balance.unconfirmed} BTC`);
         console.log(`   Address: ${balance.address}`);
         
-        console.log('\n🏆 YOU\'RE GOING TO WIN THIS HACKATHON! 🏆');
+        console.log('\n🏆 YOUR BOY SATOSHI IS GOING TO WIN THIS HACKATHON! 🏆');
         console.log('🚀 Ready for REAL Bitcoin transactions!');
     });
 }

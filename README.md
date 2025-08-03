@@ -1,10 +1,10 @@
-# 🌉 CrossChain Bridge
+# 🏆 Your Boy Satoshi
 
-**Revolutionary Bitcoin ↔ Ethereum Cross-Chain Swaps with Real HTLC Implementation**
+**Revolutionary Bitcoin ↔ Ethereum Cross-Chain Bridge with Real HTLC Implementation**
 
 ## 🚀 Overview
 
-CrossChain Bridge is a novel extension of 1inch Fusion+ that enables seamless cross-chain swaps between Bitcoin and Ethereum networks. Built with real Hash Time Lock Contracts (HTLC) and actual blockchain integration.
+Your Boy Satoshi is a novel extension of 1inch Fusion+ that enables seamless cross-chain swaps between Bitcoin and Ethereum networks. Built with real Hash Time Lock Contracts (HTLC) and actual blockchain integration, this project brings Satoshi's vision of peer-to-peer electronic cash into the modern DeFi ecosystem.
 
 ## ✨ Features
 
@@ -74,7 +74,7 @@ open http://localhost:3004
 ## 🎯 Current Status
 
 ### ✅ **Real Bitcoin Integration**
-- **Balance**: 0.00740515 BTC (real testnet funds)
+- **Balance**: 0.00738515 BTC (real testnet funds)
 - **Address**: `mpjCmhYqwCDK2Vp5WHrxtJEaaZJmduG6iH`
 - **Network**: Bitcoin Testnet
 - **Status**: ✅ Fully Operational
@@ -118,9 +118,9 @@ OP_ENDIF
 
 ### Real Transaction Example
 ```
-🔗 TXID: aa599e6564e90a79e472a75b87db8e29066b6f98167f637eff95057a1ccac6df
-🌐 Explorer: https://blockstream.info/testnet/tx/aa599e6564e90a79e472a75b87db8e29066b6f98167f637eff95057a1ccac6df
-💰 Amount: 0.00001000 BTC
+🔗 TXID: e034f18f146f340ba458c2caa95b3ddde77e9671d1c6d7654e222282d73e0992
+🌐 Explorer: https://blockstream.info/testnet/tx/e034f18f146f340ba458c2caa95b3ddde77e9671d1c6d7654e222282d73e0992
+💰 Amount: 0.00010000 BTC
 🔒 HTLC: Real hashlock implementation
 ```
 
@@ -141,7 +141,7 @@ OP_ENDIF
 - **Partial Fills**: ✅ Extensible architecture
 
 ### 🎯 **Demo Script**
-1. **Show Real Balances**: Display actual 0.00740515 BTC
+1. **Show Real Balances**: Display actual 0.00738515 BTC
 2. **Create Real Order**: Place actual Bitcoin testnet transaction
 3. **Show HTLC Details**: Display real hashlock and timelock
 4. **Verify on Explorer**: Click real transaction links
@@ -160,4 +160,4 @@ MIT License - Built for hackathon demonstration with real blockchain integration
 
 ---
 
-**🏆 CrossChain Bridge - Revolutionizing Cross-Chain Swaps with Real HTLC Implementation! 🏆**
+**🏆 Your Boy Satoshi - Revolutionizing Cross-Chain Swaps with Real HTLC Implementation! 🏆**
