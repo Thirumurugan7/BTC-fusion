@@ -2,10 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { randomBytes } = require('ethers');
-const crypto = require('crypto');
+const crypto = require('crypto'); // Use built-in crypto module
 const { Web3 } = require('web3');
 const RealBitcoinIntegration = require('./real-bitcoin-integration');
 require('dotenv').config();
+const { HashLock } = require('@1inch/cross-chain-sdk');
+const { PrivateKeyProviderConnector } = require('@1inch/cross-chain-sdk');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
