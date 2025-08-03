@@ -271,8 +271,23 @@ async function startServer() {
     
     // Update the server startup to work with Vercel
     if (process.env.NODE_ENV === 'production') {
-        // For Vercel deployment
-        module.exports = app;
+        // For Vercel deployment - don't call app.listen()
+        console.log('�� YOUR BOY SATOSHI - VERCEL DEPLOYMENT!');
+        console.log('🚀 Serverless function ready');
+        console.log(`💰 Bitcoin: ${bitcoinIntegration.getAddress()}`);
+        console.log(`💰 Ethereum: ${process.env.WALLET_ADDRESS || 'Not configured'}`);
+        
+        console.log('\n🎯 VERCEL DEPLOYMENT FEATURES:');
+        console.log('   ✅ Real Bitcoin testnet transactions');
+        console.log('   ✅ ACTUAL HTLC implementation');
+        console.log('   ✅ REAL transaction broadcasting');
+        console.log('   ✅ REAL UTXO management');
+        console.log('   ✅ REAL Bitcoin script generation');
+        console.log('   ✅ REAL transaction signing');
+        console.log('   ✅ REAL explorer links');
+        console.log('   ✅ REAL balance checking');
+        
+        console.log('\n🏆 YOUR BOY SATOSHI IS READY FOR VERCEL! 🏆');
     } else {
         // For local development
         app.listen(PORT, () => {
@@ -304,4 +319,7 @@ async function startServer() {
     }
 }
 
-startServer().catch(console.error); 
+startServer().catch(console.error);
+
+// Export for Vercel serverless function
+module.exports = app; 
