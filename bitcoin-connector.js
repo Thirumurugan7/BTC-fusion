@@ -2,13 +2,15 @@ const bitcoin = require('bitcoinjs-lib');
 const axios = require('axios');
 const { BIP32Factory } = require('bip32');
 const ecc = require('tiny-secp256k1');
+const { ECPairFactory } = require('ecpair');
 const bip32 = BIP32Factory(ecc);
+const ECPair = ECPairFactory(ecc);
 
 class BitcoinConnector {
     constructor(privateKey, network = 'testnet') {
         this.network = network === 'testnet' ? bitcoin.networks.testnet : bitcoin.networks.bitcoin;
         this.privateKey = privateKey;
-        this.keyPair = bitcoin.ECPair.fromPrivateKey(Buffer.from(privateKey, 'hex'), { network: this.network });
+        this.keyPair = ECPair.fromPrivateKey(Buffer.from(privateKey, 'hex'), { network: this.network });
         this.address = bitcoin.payments.p2pkh({ pubkey: this.keyPair.publicKey, network: this.network }).address;
         
         // Bitcoin testnet RPC endpoints (you can replace with your own)
@@ -101,7 +103,7 @@ class BitcoinConnector {
     createHtlcScript(hashlock, timelock, senderAddress, recipientAddress) {
         // HTLC script: OP_HASH160 <hashlock> OP_EQUAL OP_IF <recipient_pubkey> OP_CHECKSIG OP_ELSE <timelock> OP_CHECKLOCKTIMEVERIFY OP_DROP <sender_pubkey> OP_CHECKSIG OP_ENDIF
         const senderPubkey = this.keyPair.publicKey;
-        const recipientPubkey = bitcoin.ECPair.fromPrivateKey(Buffer.from('0000000000000000000000000000000000000000000000000000000000000001', 'hex')).publicKey; // Placeholder
+        const recipientPubkey = ECPair.fromPrivateKey(Buffer.from('0000000000000000000000000000000000000000000000000000000000000001', 'hex')).publicKey; // Placeholder
 
         const script = bitcoin.script.compile([
             bitcoin.opcodes.OP_HASH160,
